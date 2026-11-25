@@ -1,0 +1,88 @@
+{
+ "name": "mlp",
+ "kind": "mlp",
+ "repo": null,
+ "license": "ours (trained here)",
+ "heads": [
+  {
+   "id": "move",
+   "type": "choice",
+   "keys": [
+    "north",
+    "northeast",
+    "east",
+    "southeast",
+    "south",
+    "southwest",
+    "west",
+    "northwest",
+    "stay"
+   ]
+  },
+  {
+   "id": "aim",
+   "type": "choice",
+   "keys": [
+    "Z1",
+    "Z2",
+    "Z3",
+    "Z4",
+    "Z5",
+    "none"
+   ]
+  },
+  {
+   "id": "shoot",
+   "type": "noul",
+   "keys": [
+    "false",
+    "true"
+   ]
+  },
+  {
+   "id": "danger",
+   "type": "score",
+   "keys": [
+    "0",
+    "1",
+    "2"
+   ]
+  },
+  {
+   "id": "spawn_now",
+   "type": "noul",
+   "keys": [
+    "false",
+    "true"
+   ]
+  },
+  {
+   "id": "spawn_gate",
+   "type": "choice",
+   "keys": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ]
+  }
+ ],
+ "offsets": [
+  0,
+  9,
+  15,
+  17,
+  20,
+  22,
+  26
+ ],
+ "temperatures": [
+  0.8583637271829215,
+  0.763219264176351,
+  0.44983182142517136,
+  0.809394670266749,
+  0.5689763839002887,
+  0.8583637271829215
+ ],
+ "max_len": null
+}

@@ -1,0 +1,43 @@
+# realtime-game-decisions (inside Partii: the decide addon): tiny per-game decision models (an MLP "student" with one head per question) on burn's CPU backend.
+# Inside Partii it is a member of the platform/ai workspace; published, it builds against upstream burn 0.22.1.
+# CPU path: flex (Device::flex()). The `gpu` feature only pulls in the wgpu backend for the coming GPU path.
+[package]
+name = "realtime-game-decisions"
+version = "0.0.1"
+edition = "2021"
+authors = ["Partii Games"]
+license = "MIT OR Apache-2.0"
+description = "On-device game AI for NPCs, bots and difficulty: microsecond decisions with calibrated probabilities. Tiny per-game models answering choice / yes-no / score questions on CPU or in the browser (wasm)."
+readme = "README.md"
+repository = "https://github.com/PartiiGames/realtime-game-decisions"
+keywords = ["game-ai", "npc", "bot", "ai", "wasm"]
+categories = ["game-development", "science", "wasm"]
+include = ["src/**", "examples/decide.rs", "examples/bench.rs", "tests/**", "testdata/**", "README.md", "LICENSE-MIT", "LICENSE-APACHE", "NOTICE", "Cargo.toml"]
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[features]
+# gpu: the wgpu/WebGPU path with ai-core's vendored kernels (the general model). Without it the crate is the CPU path
+# only (flex), which is all the per-tick student needs: a much smaller .wasm for games that ship only a student.
+# Default is the CPU path only: the GPU path isn't implemented yet, and its kernels need Partii's patched burn crates.
+default = []
+gpu = ["burn/wgpu", "burn/fusion", "burn/webgpu", "dep:burn-cubecl", "dep:burn-wgpu"]
+
+[dependencies]
+burn = { version = "=0.22.1", default-features = false, features = ["std", "flex", "simd", "rayon"] }   # simd + rayon: burn-flex's SIMD GEMM and threads (off with default-features = false; voicii/chatii 11-25)
+burn-cubecl = { version = "=0.22.1", default-features = false, features = ["std", "template"], optional = true }
+burn-wgpu = { version = "=0.22.1", default-features = false, features = ["std", "template"], optional = true }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Browser wasm: getrandom 0.4 (pulled in by burn's random init) needs its wasm_js backend on wasm32-unknown-unknown.
+[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
+getrandom = { version = "0.4", features = ["wasm_js"] }
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+
+# pollster: block_on for the example, the bench and the tests (the library itself is async only).
+[dev-dependencies]
+pollster = "0.4"

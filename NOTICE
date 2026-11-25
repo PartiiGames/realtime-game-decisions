@@ -1,0 +1,16 @@
+realtime-game-decisions
+Copyright (c) 2026 Partii Games LLC
+Licensed under either of Apache License 2.0 (LICENSE-APACHE) or MIT license (LICENSE-MIT), at your option.
+
+Model weights and data in this crate
+- testdata/arena-mlp/ (heads.json, weights.json, weights.bin, fixture.json): a 2x128 MLP student for the Arena demo
+  game, trained from scratch by Partii Games on synthetic game states and rule-teacher labels produced by our
+  own code. No third-party weights, datasets or player data. Same licence as the crate (MIT OR Apache-2.0).
+- The crate downloads no weights. Callers pass their own heads.json / weights.json / weights.bin.
+
+Third-party code (dependencies, not included in this crate; fetched by Cargo under their own licences)
+- burn, cubecl and the rest of the dependency graph: MIT and/or Apache-2.0 (and other permissive licences: BSD,
+  ISC, Zlib, Unicode-3.0, CC0, BSL-1.0).
+- colored 3.1.1 (https://crates.io/crates/colored), via burn-tensor: MPL-2.0. Unmodified; source on crates.io.
+- buildid 1.1.0 (https://crates.io/crates/buildid), via cubecl-runtime, only with the `gpu` feature: MPL-2.0.
+  Unmodified; source on crates.io.

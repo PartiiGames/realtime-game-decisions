@@ -1,0 +1,41 @@
+{
+ "net.0.weight": {
+  "shape": [
+   128,
+   61
+  ],
+  "offset": 0
+ },
+ "net.0.bias": {
+  "shape": [
+   128
+  ],
+  "offset": 7808
+ },
+ "net.2.weight": {
+  "shape": [
+   128,
+   128
+  ],
+  "offset": 7936
+ },
+ "net.2.bias": {
+  "shape": [
+   128
+  ],
+  "offset": 24320
+ },
+ "net.4.weight": {
+  "shape": [
+   26,
+   128
+  ],
+  "offset": 24448
+ },
+ "net.4.bias": {
+  "shape": [
+   26
+  ],
+  "offset": 27776
+ }
+}
